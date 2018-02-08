@@ -1,0 +1,17 @@
+{
+    "name": "vitor-hugo-64/login-system",
+    "authors": [
+        {
+            "name": "Vitor Hugo Balon de Oliveira"
+        }
+    ],
+    "require": {
+    	"slim/slim":"2.0",
+    	"rain/raintpl":"3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "vendor\\login\\php-classes\\src"
+        }
+    }
+}
