@@ -6,9 +6,9 @@
 
 	use \Slim\Slim;
 	use \Model\User;
-
 	$app = new Slim();
 	$app->config('debug', true);
+
 
 	$app->get('/', function() 
 	{
@@ -18,28 +18,33 @@
 
 	$app->post('/createAccount', function() 
 	{
-
 		$user = new User();
 		$datas = [ 'name'=>$_POST['name'], 'age'=>$_POST['age'], 'email'=>$_POST['email'], 'password'=>$_POST['password']];
 		$result = $user->createAccount($datas);
 		header('Location: /');
 		exit;
-
 	});
 
-	$app->post('/adm', function ()
+	$app->get('/adm', function ()
 	{
-		
 		$user = new User();
-		$datas = ['emailLogin'=>$_POST['emailLogin'], 'passwordLogin'=>$_POST['passwordLogin']];
-		$result = $user->login($datas);
-
-	});
-
-	$app->get(' /adm', function ()
-	{
+		$user->verifyLogin();
 		$tpl = new RainTpl();
 		$tpl->drawTemplate([ 'header', 'adm', 'footer']);
 	});
+
+	$app->post('/login', function ()
+	{
+		$user = new User();
+		$datas = ['emailLogin'=>$_POST['emailLogin'], 'passwordLogin'=>$_POST['passwordLogin']];
+		$user->login($datas);
+	});
+
+	$app->get('/logout', function ()
+	{
+		$user = new User();
+		$user->logout();
+	});
+
 
 	$app->run();

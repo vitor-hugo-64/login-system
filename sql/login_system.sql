@@ -1,13 +1,5 @@
-CREATE DATABASE LOGIN_SYSTEM;
+use certificado;
 
-USE LOGIN_SYSTEM;
+show tables;
 
-CREATE TABLE USER(
-	ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    NAME VARCHAR(45),
-    AGE INT(2),
-    EMAIL VARCHAR(45) UNIQUE,
-    PASSWORD VARCHAR(50)
-);
-
-select * from user;
+select * from certificados;

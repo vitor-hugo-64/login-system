@@ -42,19 +42,42 @@
 			$result = $sql->select( $querySelect, $paramSelect);
 
 			if (count($result) === 0) {
-				return false;
+				header("Location: /");
+				exit;
 			}
 
-			if ($parameters['passwordLogin'] === $result['password']) {
-					
-				$_SESSION['user'] = $result['email'];
-				header('Location: /adm');
+			$data = $result[0];
+
+			if ($parameters['passwordLogin'] === $data['PASSWORD']) {
+
+				$_SESSION['user'] = $data;
+				header("Location: /adm");
 				exit;
 
 			} else {
-				return false;
+				header("Location: /");
+				exit;
 			}
 
+		}
+
+		public function Logout()
+		{
+			$_SESSION['user'] = NULL;
+			header("Location: /");
+			exit;
+		}
+
+		public function verifyLogin()
+		{
+			if (
+				!isset($_SESSION['user']) ||
+				!$_SESSION['user'] ||
+				$_SESSION['user']['ID'] < 0
+			) {
+				header("Location: /");
+				exit;
+			}
 		}
 
 	}

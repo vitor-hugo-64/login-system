@@ -58,7 +58,7 @@
           <h2>Faça Login</h2>
           <br>
           
-          <form method="POST" action="/adm">
+          <form method="POST" action="/login">
           
             <div class="form-group">
 
